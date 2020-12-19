@@ -8,10 +8,12 @@ use Symfony\Component\Console\Input\InputArgument;
 
 //use App\Importe\Service\LocationClient;
 
+use Ivd24\Dao\Object\ObjectDao;
+
 class GuzzleCommand extends Command
 {
-    // php bin/console app:guzzle-test
-    protected static $defaultName = 'app:guzzle-test';
+    // php bin/console app:test-test
+    protected static $defaultName = 'app:test-test';
 
     // private $locationClient;
 
@@ -20,6 +22,14 @@ class GuzzleCommand extends Command
     //     $this->locationClient = $locationClient;
     //     parent::__construct();
     // }
+
+    private $objectDao;
+
+    public function __construct(ObjectDao $objectDao)
+    {
+        $this->objectDao = $objectDao;
+        parent::__construct();
+    }
 
     protected function configure()
     {
@@ -105,8 +115,19 @@ class GuzzleCommand extends Command
         // // 'application/json; charset=utf8'
         // echo $res->getBody();
         // // {"type":"User"...'
-            echo "Hello test \n";
-        
+        //    echo "Hello test \n";
+
+        //$objekt_id = 196;
+        //$rs = $this->objectDao->getObjectData(['object_id' => $objekt_id]);
+        //var_dump($rs[0]);
+        //var_dump($rs[0]['config_server_id']);
+        //var_dump($rs[0]['anhang_bilderordner']);
+
+        $array1 = array("color" => "red");
+        $array2 = array("color2" => "green", "shape" => "trapezoid");
+        $result = array_merge($array1, $array2);
+        print_r($result);
+
     }
 
 }

@@ -22,4 +22,16 @@ class MaklerService
             return $this->dao->getMaklerUserByUserid(['user_id' => (int)$identifier]);
         }
     }
+
+    function getAllMaklerData() {
+        return $this->dao->getAllMaklerData([]);
+    }
+
+    function getMaklerData($identifier) {
+        if (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
+            return $this->dao->getMaklerDataByEmail(['email' => $identifier]);
+        } else {
+            return $this->dao->getMaklerDataByUserid(['user_id' => (int)$identifier]);
+        }
+    }
 }

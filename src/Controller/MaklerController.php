@@ -1,7 +1,7 @@
 <?php
 namespace Ivd24\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+//use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,12 +16,19 @@ use Ivd24\Service\Makler\MaklerService;
  */
 class MaklerController //extends AbstractController
 {
+    private $maklerService;
+   
+    public function __construct(MaklerService $maklerService)
+    {
+        $this->maklerService = $maklerService;
+    }
+
     /**
      * @Route("/getallmakleruser", name="api_makler_get_all", methods={"GET"})
      */
-    public function getAllMaklerUser(MaklerService $maklerService)
+    public function getAllMaklerUser()
     {
-        $rs = $maklerService->getAllMaklerUser();
+        $rs = $this->maklerService->getAllMaklerUser();
         //return $this->json($rs);
         return new Response(json_encode($rs), Response::HTTP_OK, ['Content-Type' => 'application/json']);
     }
@@ -29,11 +36,33 @@ class MaklerController //extends AbstractController
     /**
      * @Route("/getmakleruser", name="api_makler_get_by_useridentifier", methods={"GET"})
      */
-    public function getMaklerUser(Request $request, MaklerService $maklerService)
+    public function getMaklerUser(Request $request)
     { 
-        //  /getmakleruser?identifier=user_id or email
+        //  /getmakleruser?identifier=<user_id> or <email>
         $userIdentifier = $request->query->get('identifier');
-        $rs = $maklerService->getMaklerUser(trim($userIdentifier));
+        $rs = $this->maklerService->getMaklerUser(trim($userIdentifier));
+        //return $this->json($rs);
+        return new Response(json_encode($rs), Response::HTTP_OK, ['Content-Type' => 'application/json']);  
+    }
+
+    /**
+     * @Route("/getallmaklerdata", name="api_makler_get_all_data", methods={"GET"})
+     */
+    public function getAllMaklerData()
+    {
+        $rs = $this->maklerService->getAllMaklerData();
+        //return $this->json($rs);
+        return new Response(json_encode($rs), Response::HTTP_OK, ['Content-Type' => 'application/json']);
+    }
+
+    /**
+     * @Route("/getmaklerdata", name="api_makler_get_data_by_makleridentifier", methods={"GET"})
+     */
+    public function getMaklerData(Request $request)
+    { 
+        //  /getmaklerdata?identifier=<user_id> or <email>
+        $maklerIdentifier = $request->query->get('identifier');
+        $rs = $this->maklerService->getMaklerData(trim($maklerIdentifier));
         //return $this->json($rs);
         return new Response(json_encode($rs), Response::HTTP_OK, ['Content-Type' => 'application/json']);  
     }
