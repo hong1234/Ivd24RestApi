@@ -24,25 +24,13 @@ class ObjectService
         ]);
     }
 
-    function insertObjectAttachment(iterable $attachment) {
-        
-        $objekt_id = $attachment['objekt_id'];
+    function insertObjectAttachmentVideo(iterable $attachment) {
+        $objekt_id = $attachment['objekt_id']; //$objekt_id = 73197;
         $rs = $this->dao->getObjectData(['object_id' => $objekt_id]);
         $attachment2 = array_merge($attachment, $rs[0], ["reihenfolge" => 1]);
         $this->dao->insertObjectAttachment($attachment2);
-
-        //$objekt_id = 73197;
-        $rs = $this->dao->getObjectAttachmentNotVideo(['object_id' => $objekt_id]);
-        foreach ($rs as $at) {
-            //echo $at['objekt_anhang_id'] . ' | ' . $at['reihenfolge'] . "\n";
-            if($at['reihenfolge'] < 2){
-                $this->dao->updateAttachment([
-                    'objekt_anhang_id' => $at['objekt_anhang_id'],
-                    'reihenfolge' => $at['reihenfolge'] + 1    
-                ]);
-            }
-        }
-
+        // update non-video attachments of object
+        $this->dao->updateSequenceOfNonVideoAttachment(['object_id' => $objekt_id]);
         return 1;
     }
 }

@@ -26,13 +26,9 @@ class ObjectDao extends BaseDao {
         return $this->doQuery($sql, $values);
     }
 
-    public function getObjectAttachmentNotVideo(iterable $values) {
-        $sql = "SELECT objekt_id, objekt_anhang_id, anhang_art, reihenfolge FROM objekt_anhaenge WHERE objekt_id = :object_id and anhang_art !='Video'";
-        return $this->doQuery($sql, $values);
-    }
-
-    public function updateAttachment(iterable $values) {
-        $sql = 'UPDATE objekt_anhaenge SET reihenfolge = :reihenfolge WHERE objekt_anhang_id = :objekt_anhang_id';
+    public function updateSequenceOfNonVideoAttachment(iterable $values) {
+        $sql = "UPDATE objekt_anhaenge SET reihenfolge = reihenfolge + 1 WHERE objekt_id = :object_id AND anhang_art != 'Video'";
         return $this->doSQL($sql, $values);
     }
+
 }
