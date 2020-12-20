@@ -45,9 +45,9 @@ class ObjectController //extends AbstractController
     }
 
     /**
-     * @Route("/storybox", name="object_attachment_insert", methods={"POST"})
+     * @Route("/storybox", name="object_attachment_insert_video", methods={"POST"})
      */
-    public function insertObjectAttachment(Request $request)
+    public function insertObjectAttachmentVideo(Request $request)
     {
         // <userId>/<objektid>/<art>/<titel>/<format>/link
         // Request Body in json format
