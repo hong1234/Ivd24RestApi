@@ -117,16 +117,20 @@ class GuzzleCommand extends Command
         // // {"type":"User"...'
         //    echo "Hello test \n";
 
-        //$objekt_id = 196;
-        //$rs = $this->objectDao->getObjectData(['object_id' => $objekt_id]);
+        $objekt_id = 73197;
+        $rs = $this->objectDao->getObjectAttachmentNotVideo(['object_id' => $objekt_id]);
         //var_dump($rs[0]);
         //var_dump($rs[0]['config_server_id']);
         //var_dump($rs[0]['anhang_bilderordner']);
 
-        $array1 = array("color" => "red");
-        $array2 = array("color2" => "green", "shape" => "trapezoid");
-        $result = array_merge($array1, $array2);
-        print_r($result);
+        // $array1 = array("color" => "red");
+        // $array2 = array("color2" => "green", "shape" => "trapezoid");
+        // $result = array_merge($array1, $array2);
+        //print_r($rs[0]['reihenfolge']);
+
+        foreach ($rs as $at) {
+            echo $at['objekt_anhang_id'] . ' | ' . $at['reihenfolge'] . "\n";
+        }
 
     }
 

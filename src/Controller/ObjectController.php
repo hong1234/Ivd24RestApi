@@ -56,7 +56,7 @@ class ObjectController //extends AbstractController
         //     "anhang_titel": "abc",    <titel>
         //     "anhang_pfad": "https://www.linkzumvideo.de" <link>
 
-        //     "anhang_art": "video",    <art>
+        //     "anhang_art": "Video",    <art>
         //     "anhang_format": "link",  <format>
 
         //     "config_server_id": 3,          ----------
