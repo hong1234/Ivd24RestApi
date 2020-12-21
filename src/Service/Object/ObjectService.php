@@ -17,16 +17,13 @@ class ObjectService
         ]);
     }
 
-    function getObjectByUseridAndObjectid($userId, $objectId) {
-        return $this->dao->getObjectByUseridAndObjectid([
-            'user_id' => $userId,
-            'object_id' => $objectId
-        ]);
+    function getObjectByObjectid($objectId) {
+        return $this->dao->getObjectByObjectid(['object_id' => $objectId]);
     }
 
     function insertObjectAttachmentVideo(iterable $attachment) {
-        $objekt_id = $attachment['objekt_id']; //$objekt_id = 73197;
-        $rs = $this->dao->getObjectData(['object_id' => $objekt_id]);
+        $objekt_id = $attachment['objekt_id']; //$objekt_id = 184102781;  // user_id = 100325
+        $rs = $this->dao->getServerIdAndImageDirectory(['object_id' => $objekt_id]);
         $attachment2 = array_merge($attachment, $rs[0], ["reihenfolge" => 1]);
         $this->dao->insertObjectAttachment($attachment2);
         // update non-video attachments of object

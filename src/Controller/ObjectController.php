@@ -36,9 +36,9 @@ class ObjectController //extends AbstractController
     /**
      * @Route("/objectdata/{userId}/{objectId}", name="object_get_by_userid_objectid", methods={"GET"})
      */
-    public function getObjectByUseridAndObjectid($userId, $objectId)
+    public function getObjectByObjectid($userId, $objectId)
     { 
-        $rs = $this->objectService->getObjectByUseridAndObjectid(trim($userId), trim($objectId));
+        $rs = $this->objectService->getObjectByObjectid(trim($objectId));
         //var_dump($rs); exit;
         //return $this->json($rs);
         return new Response(json_encode($rs), Response::HTTP_OK, ['Content-Type' => 'application/json']);  
@@ -51,7 +51,7 @@ class ObjectController //extends AbstractController
     {
         // <userId>/<objektid>/<art>/<titel>/<format>/link
         // Request Body in json format
-        // {                             <userId>
+        // {   
         //     "objekt_id": 123,         <objektid>
         //     "anhang_titel": "abc",    <titel>
         //     "anhang_pfad": "https://www.linkzumvideo.de" <link>
@@ -59,9 +59,11 @@ class ObjectController //extends AbstractController
         //     "anhang_art": "Video",    <art>
         //     "anhang_format": "link",  <format>
 
+        //     "user_id": 345            <userId>  // option (!)
+        // }
+        
         //     "config_server_id": 3,          ----------
         //     "anhang_bilderordner": "abc001",----------
-        // }
 
         $attachment = json_decode($request->getContent(), true); // array()
         $status = $this->objectService->insertObjectAttachmentVideo($attachment);
