@@ -14,7 +14,7 @@ class LocationService
     function getLocationByName(String $ortName) {
 
         $locations = $this->dao->getLocationByName([
-            $ortName
+            'name' => $ortName
         ]);
         if(count($locations)==1){
             return $locations[0];

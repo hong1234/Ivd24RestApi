@@ -15,15 +15,13 @@ class BaseDao {
     public function doQuery($sql, $values){
         $stmt = $this->conn->prepare($sql);
         $rt = $stmt->execute($values);
-
-        if(!$rt){
-            //return false;
+        if($rt) {
+            //return $stmt->fetchAll(\PDO::FETCH_CLASS, Result::class);
+            return $stmt->fetchAllAssociative();
+        } else {
             throw new \Exception("Query faild!");
         }    
-        
-        //$objects = $stmt->fetchAll(\PDO::FETCH_CLASS, Result::class);
-        //return $objects;
-        return $stmt->fetchAllAssociative();
+        return [];
     }
 
     public function doSQL($sql, $values){
@@ -31,11 +29,8 @@ class BaseDao {
         //echo $this->db->lastInsertId(). "\n";
         $rt = $stmt->execute($values);
         if(!$rt){
-            //return false;
             throw new \Exception("Insert faild!");
         } 
-        //return $stmt->execute($values);
-        //return true;
         return $rt;
     }
 
