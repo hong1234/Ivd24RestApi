@@ -10,7 +10,7 @@ use Symfony\Component\Console\Input\InputArgument;
 
 use Ivd24\Dao\Object\ObjectDao;
 
-class GuzzleCommand extends Command
+class TestCommand extends Command
 {
     // php bin/console app:test-test
     protected static $defaultName = 'app:test-test';
@@ -54,7 +54,6 @@ class GuzzleCommand extends Command
 
         //$client = new \GuzzleHttp\Client();
         //$response = $client->request('GET', 'http://localhost:8000/api/location?lname=München');
-        //var_dump(json_decode ($response->getBody()));
         //echo (int)json_decode ($response->getBody())->l_id;
 
         //$ortName = 'München';
@@ -94,7 +93,6 @@ class GuzzleCommand extends Command
         // ];
 
         // echo $this->locationClient->insertLocation($location);
-
         /////////
 
         // $searchkey = 'test';
@@ -119,7 +117,7 @@ class GuzzleCommand extends Command
 
         $objekt_id = 184102781;//73197;
         $rs = $this->objectDao->getObjectByObjectid(['object_id' => $objekt_id]);
-        //var_dump(unpack('x/x/x/x/corder/Ltype/dlat/dlon', $rs[0]['geo_point']));
+        var_dump(unpack('x/x/x/x/corder/Ltype/dlat/dlon', $rs[0]['geo_point']));
         //var_dump($rs[0]['config_server_id']);
         //var_dump($rs[0]['anhang_bilderordner']);
 
@@ -132,7 +130,7 @@ class GuzzleCommand extends Command
         //    echo $at['objekt_anhang_id'] . ' | ' . $at['reihenfolge'] . "\n";
         //}
 
-        var_dump($rs[0]);
+        //var_dump($rs[0]);
 
     }
 

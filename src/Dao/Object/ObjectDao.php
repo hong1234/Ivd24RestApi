@@ -38,4 +38,10 @@ class ObjectDao extends BaseDao {
         return $this->doSQL($sql, $values);
     }
 
+    public function getObjectAttachments(iterable $values) {
+        //$sql = 'SELECT objekt_id, config_server_id, anhang_bilderordner, objekt_anhang_id, anhang_titel, anhang_pfad, reihenfolge FROM objekt_anhaenge WHERE objekt_id = :object_id ORDER BY objekt_anhang_id DESC';
+        $sql = 'SELECT objekt_id, objekt_anhang_id, anhang_titel, anhang_pfad, reihenfolge FROM objekt_anhaenge WHERE objekt_id = :object_id ORDER BY objekt_anhang_id DESC';
+        return $this->doQuery($sql, $values);
+    }
+
 }
