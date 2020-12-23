@@ -6,14 +6,12 @@ use Ivd24\Dao\BaseDao;
 class ObjectDao extends BaseDao {
 
     public function getObjectByUserid(iterable $values) {
-        $sql = 'SELECT * FROM objekt_master WHERE user_id = :user_id';
+        $sql = 'SELECT *, AsText(geo_point) AS geo_point, AsText(geo_point_blurred) AS geo_point_blurred, AsText(ahu_geo_point) AS ahu_geo_point FROM objekt_master WHERE user_id = :user_id';
         return $this->doQuery($sql, $values);
     }
 
     public function getObjectByObjectid(iterable $values) {
-        //$sql = 'SELECT objekt_id, objekt_id_intern, user_id, objekt_titel, ort FROM objekt_master WHERE objekt_id = :object_id';
-        //$sql = 'SELECT objekt_id_intern, user_id, objekt_titel, geo_point, geo_point_blurred, ahu_geo_point FROM objekt_master WHERE objekt_id = :object_id';
-        $sql = 'SELECT * FROM objekt_master WHERE objekt_id = :object_id';
+        $sql = 'SELECT *, AsText(geo_point) AS geo_point, AsText(geo_point_blurred) AS geo_point_blurred, AsText(ahu_geo_point) AS ahu_geo_point FROM objekt_master WHERE objekt_id = :object_id';
         return $this->doQuery($sql, $values);
     }
 

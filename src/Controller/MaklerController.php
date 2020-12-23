@@ -38,7 +38,7 @@ class MaklerController //extends AbstractController
      */
     public function getMaklerUser(Request $request)
     { 
-        //  /getmakleruser?identifier=<user_id> or <email>
+        //  /getmakleruser?identifier=<user_id> or <email>  //info@strecker-olenyi.de
         $userIdentifier = $request->query->get('identifier');
         $rs = $this->maklerService->getMaklerUser(trim($userIdentifier));
         //return $this->json($rs);

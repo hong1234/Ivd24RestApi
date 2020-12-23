@@ -115,11 +115,19 @@ class TestCommand extends Command
         // // {"type":"User"...'
         //    echo "Hello test \n";
 
-        $objekt_id = 184102781;//73197;
+        //$objekt_id = 192844;
+        //$objekt_id = 184102781;
+        $objekt_id = 60790; //73197;
         $rs = $this->objectDao->getObjectByObjectid(['object_id' => $objekt_id]);
-        var_dump(unpack('x/x/x/x/corder/Ltype/dlat/dlon', $rs[0]['geo_point']));
-        //var_dump($rs[0]['config_server_id']);
+        var_dump($rs);
+        //var_dump($rs[0]['geo_point']);
         //var_dump($rs[0]['anhang_bilderordner']);
+
+        //$coordinates = unpack('x/x/x/x/corder/Ltype/dlat/dlon', $rs[0]['geo_point']);
+        //$coordinates = unpack('x4/corder/Ltype/dlat/dlon', $rs[0]['geo_point']); 
+        //$coordinates = unpack('x9/clat/Llat/dlat/dlon', $rs[0]['geo_point']);
+        //echo $coordinates['lat'] . "\n";
+        //echo $coordinates['lon'] . "\n";
 
         // $array1 = array("color" => "red");
         // $array2 = array("color2" => "green", "shape" => "trapezoid");
@@ -131,6 +139,11 @@ class TestCommand extends Command
         //}
 
         //var_dump($rs[0]);
+
+        // $rs = $this->objectDao->getObjectByUserid([
+        //     'user_id' => 14197
+        // ]);
+        // var_dump($rs);
 
     }
 
