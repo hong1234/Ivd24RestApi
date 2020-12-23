@@ -61,7 +61,7 @@ class ObjectClientCommand extends Command
         // add video attachment ------------------------------------
         $video = [
             "objekt_id" => $object_id,  
-            "anhang_titel" => "abcNew17",  
+            "anhang_titel" => "abcNew18",  
             "anhang_pfad" => "https://www.linkzumvideo2.de",
             "anhang_art" => "Video",
             "anhang_format" => "link"
@@ -74,8 +74,8 @@ class ObjectClientCommand extends Command
 
         // echo $response->getStatusCode() . "\n";
 
-        $response = $this->apiClient->addVideoAttachment($video);
-        echo $response . "\n";
+        //$response = $this->apiClient->addVideoAttachment($video);
+        //echo $response . "\n";
 
         // display attachments of object ----------------------------
         

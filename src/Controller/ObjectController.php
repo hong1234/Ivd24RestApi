@@ -66,8 +66,8 @@ class ObjectController //extends AbstractController
         //     "anhang_bilderordner": "abc001",----------
 
         $attachment = json_decode($request->getContent(), true); // array()
-        $status = $this->objectService->insertObjectAttachmentVideo($attachment);
-        return new Response(json_encode(["status" => $status]), Response::HTTP_CREATED, ['Content-Type' => 'application/json']);
+        $rs = $this->objectService->insertObjectAttachmentVideo($attachment);
+        return new Response(json_encode($rs), Response::HTTP_CREATED, ['Content-Type' => 'application/json']);
     }
     
 }
