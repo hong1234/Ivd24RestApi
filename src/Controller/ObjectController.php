@@ -69,4 +69,5 @@ class ObjectController //extends AbstractController
         $status = $this->objectService->insertObjectAttachmentVideo($attachment);
         return new Response(json_encode(["status" => $status]), Response::HTTP_CREATED, ['Content-Type' => 'application/json']);
     }
+    
 }
