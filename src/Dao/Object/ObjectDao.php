@@ -31,6 +31,11 @@ class ObjectDao extends BaseDao {
         return $this->doSQL($sql, $values); 
     }
 
+    public function updateObjektMaster(iterable $values) {
+        $sql = "UPDATE objekt_master SET media_video = :media_video WHERE objekt_id = :object_id";
+        return $this->doSQL($sql, $values);
+    }
+
     public function updateSequenceOfNonVideoAttachment(iterable $values) {
         $sql = "UPDATE objekt_anhaenge SET reihenfolge = reihenfolge + 1 WHERE objekt_id = :object_id AND anhang_art != 'Video'";
         return $this->doSQL($sql, $values);

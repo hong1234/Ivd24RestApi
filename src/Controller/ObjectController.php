@@ -52,7 +52,7 @@ class ObjectController //extends AbstractController
         // <userId>/<objektid>/<art>/<titel>/<format>/link
         // Request Body in json format
         // {   
-        //     "objekt_id": 123,         <objektid>
+        //     "objekt_id": 81,         <objektid>
         //     "anhang_titel": "abc",    <titel>
         //     "anhang_pfad": "https://www.linkzumvideo.de" <link>
 

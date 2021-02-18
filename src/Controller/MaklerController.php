@@ -12,7 +12,7 @@ use Ivd24\Service\Makler\MaklerService;
  * Class MaklerController
  * @package Ivd24\Controller
  *
- * @Route(path="")
+ * @Route(path="api")
  */
 class MaklerController //extends AbstractController
 {

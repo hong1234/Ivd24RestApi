@@ -1,3 +1,17 @@
 #index:
 #    path: /
 #    controller: Ivd24\Controller\DefaultController::index
+
+register:
+  path: /register
+  controller: Ivd24\Controller\AuthController::register
+  methods: POST
+
+api_login_check:
+  path: /api/login_check
+  controller: Ivd24\Controller\AuthController::getTokenUser
+
+test:
+  path: /api/test
+  controller: Ivd24\Controller\ApiController::test
+
