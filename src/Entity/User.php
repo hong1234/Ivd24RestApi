@@ -12,22 +12,22 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface
 {
  /**
-  * @ORM\Column(type="integer")
+  * @ORM\Column(name="api_id", type="integer")
   * @ORM\Id
   * @ORM\GeneratedValue(strategy="AUTO")
   */
  private $id;
  /**
-  * @ORM\Column(type="string", length=25, unique=true)
+  * @ORM\Column(name="partnername", type="string", length=255, unique=true)
   */
  private $username;
  /**
-  * @ORM\Column(type="string", length=255)
+  * @ORM\Column(name="password", type="string", length=255)
   */
  private $password;
 
  /**
-  * @ORM\Column(type="string", length=45)
+  * @ORM\Column(name="email", type="string", length=45)
   */
  private $email;
 
@@ -106,4 +106,5 @@ class User implements UserInterface
  public function eraseCredentials()
  {
  }
+
 }

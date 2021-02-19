@@ -12,7 +12,7 @@ use Ivd24\Service\Object\ObjectService;
  * Class ObjectController
  * @package Ivd24\Controller
  *
- * @Route(path="")
+ * @Route(path="api")
  */
 class ObjectController //extends AbstractController
 {
