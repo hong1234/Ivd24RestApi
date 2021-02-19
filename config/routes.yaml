@@ -3,7 +3,7 @@
 #    controller: Ivd24\Controller\DefaultController::index
 
 register:
-  path: /register
+  path: /api/register
   controller: Ivd24\Controller\AuthController::register
   methods: POST
 
