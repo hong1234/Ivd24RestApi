@@ -26,7 +26,6 @@
 				return $this->respondValidationError("Invalid Username or Password or Email");
 			}
 
-
 			$user = new User($username);
 			$user->setPassword($encoder->encodePassword($user, $password));
 			$user->setEmail($email);
