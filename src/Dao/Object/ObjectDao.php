@@ -25,15 +25,16 @@ class ObjectDao extends BaseDao {
     //    return $this->doQuery($sql, $values);
     //}
 
+    public function getObjectAttachments(iterable $values) {
+        //$sql = 'SELECT objekt_id, config_server_id, anhang_bilderordner, objekt_anhang_id, anhang_titel, anhang_pfad, reihenfolge FROM objekt_anhaenge WHERE objekt_id = :object_id ORDER BY objekt_anhang_id DESC';
+        $sql = 'SELECT objekt_id, objekt_anhang_id, anhang_titel, anhang_pfad, reihenfolge FROM objekt_anhaenge WHERE objekt_id = :object_id ORDER BY objekt_anhang_id DESC';
+        return $this->doQuery($sql, $values);
+    }
+
     public function insertObjectAttachment(iterable $values) {
         $sql = 'INSERT INTO objekt_anhaenge (objekt_id, anhang_titel, anhang_pfad, anhang_art, anhang_format, config_server_id, anhang_bilderordner, reihenfolge) 
                 VALUES (:objekt_id, :anhang_titel, :anhang_pfad, :anhang_art, :anhang_format, :config_server_id, :anhang_bilderordner, :reihenfolge)';
         return $this->doSQL($sql, $values); 
-    }
-
-    public function updateObjektMaster(iterable $values) {
-        $sql = "UPDATE objekt_master SET media_video = :media_video WHERE objekt_id = :object_id";
-        return $this->doSQL($sql, $values);
     }
 
     public function updateSequenceOfNonVideoAttachment(iterable $values) {
@@ -41,10 +42,34 @@ class ObjectDao extends BaseDao {
         return $this->doSQL($sql, $values);
     }
 
-    public function getObjectAttachments(iterable $values) {
-        //$sql = 'SELECT objekt_id, config_server_id, anhang_bilderordner, objekt_anhang_id, anhang_titel, anhang_pfad, reihenfolge FROM objekt_anhaenge WHERE objekt_id = :object_id ORDER BY objekt_anhang_id DESC';
-        $sql = 'SELECT objekt_id, objekt_anhang_id, anhang_titel, anhang_pfad, reihenfolge FROM objekt_anhaenge WHERE objekt_id = :object_id ORDER BY objekt_anhang_id DESC';
-        return $this->doQuery($sql, $values);
+    public function updateObjektMaster(iterable $values) {
+        $sql = "UPDATE objekt_master SET media_video = :media_video WHERE objekt_id = :object_id";
+        return $this->doSQL($sql, $values);
+    }
+
+    public function insertAttachment(iterable $attachment) {
+
+        $objekt_id   = $attachment['objekt_id'];
+        $anhang_pfad = $attachment['anhang_pfad'];
+
+        $this->db->beginTransaction();
+
+        try {
+            //... do some work
+            $this->insertObjectAttachment($attachment);
+            $this->updateSequenceOfNonVideoAttachment(['object_id' => $objekt_id]);
+            $this->updateObjektMaster(['media_video' => $anhang_pfad, 'object_id' => $objekt_id]);
+            
+            $this->db->commit();
+
+            return array_merge($attachment, ["status" => "ok"]);
+
+        } catch (\Exception $e) {
+            $this->db->rollBack();
+            throw $e;
+        }
+
+        return ["status" => "faild"];
     }
 
 }

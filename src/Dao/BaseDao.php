@@ -6,32 +6,31 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class BaseDao {
     
-    public $conn;
+    public $db;// Doctrine\DBAL\Connection
 
-    public function __construct(EntityManagerInterface $manager) {
-        $this->conn = $manager->getConnection();
+    public function __construct(EntityManagerInterface $em) {
+        $this->db = $em->getConnection();
+        //var_dump($this->db);die;
     }
 
     public function doQuery($sql, $values){
-        $stmt = $this->conn->prepare($sql);
-        $rt = $stmt->execute($values);
-        if($rt) {
-            //return $stmt->fetchAll(\PDO::FETCH_CLASS, Result::class);
-            return $stmt->fetchAllAssociative();
-        } else {
-            throw new \Exception("Query faild!");
-        }    
-        return [];
+        $stmt = $this->db->prepare($sql);  // Doctrine\DBAL\Statement
+        // var_dump($stmt);die;
+        if(!$stmt->execute($values)) {
+            throw new \Exception("DoQuery faild!"); 
+        }  
+        
+        return $stmt->fetchAllAssociative();
     }
 
     public function doSQL($sql, $values){
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->db->prepare($sql);
         //echo $this->db->lastInsertId(). "\n";
-        $rt = $stmt->execute($values);
-        if(!$rt){
-            throw new \Exception("Insert faild!");
+        if(!$stmt->execute($values)){
+            throw new \Exception("DoSQL faild!");
         } 
-        return $rt;
+        
+        return true;
     }
 
     public function showResult($objects){
